@@ -16,10 +16,10 @@ COPY --from=jre-build /javaruntime $JAVA_HOME
 
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y install curl
 RUN rm -rf /var/lib/api/lists/*
-RUN adduser --disabled-password --gecos "" --home /opt/teku teku && \
+RUN adduser --disabled-password --gecos "" --home /opt/teku teku -u 1000 && \
     chown teku:teku /opt/teku
 
-USER teku
+USER user
 WORKDIR /opt/teku
 
 # copy application (with libraries inside)
